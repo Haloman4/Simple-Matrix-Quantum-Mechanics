@@ -1,0 +1,27 @@
+import numpy as np
+
+# Define the Hamiltonian 
+# Example: a 1/2 spin particle aligned with a y-axis magnetic field
+B = 1
+
+H = np.array([[0, 1j], [-1j, 0]])
+
+#Find the eigenenergies and eigenstates
+H_eigen = np.linalg.eigh(H)
+print(H_eigen)
+
+########### Vectors and eigenvalue probabilities
+# Define a quantum vector, psi
+phi1 = np.array([1j, 0])
+phi2 = np.array([0, 1])
+psi = (5*phi1) + (2 * phi2)
+
+# Born's Rule
+def eigenvalue_prob(psi, phi):
+    denominator = np.vdot(psi, psi)
+    numerator = (np.abs(np.vdot(phi, psi)))**2
+    prob = np.real(numerator / denominator)
+    return prob
+
+# Use (psi, phi) where phi is the component, i.e. phi1, phi2, etc.
+print(eigenvalue_prob(psi, phi2))
